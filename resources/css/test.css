@@ -1,0 +1,26 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #333;
+}
+
+.table-dark {
+    color: white;
+    background-color: #222;
+}
+
+.table-dark thead th {
+    color: white;
+    background-color: #444;
+}
+
+.table-dark tbody tr {
+    background-color: #333;
+}
+
+.table-dark tbody tr:nth-of-type(odd) {
+    background-color: #444;
+}
+
+.table-dark td {
+    padding: 0.5rem;
+}
