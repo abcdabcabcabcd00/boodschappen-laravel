@@ -33,6 +33,6 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@next-5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@next-5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer="defer"></script>
 </body>
 </html>
