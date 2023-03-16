@@ -15,18 +15,27 @@ class GroceryController extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    function index() {
+    public function index()
+    {
         return view("groceries/index");
     }
 
-    function create(Request $request) {
+    public function create(Request $request)
+    {
         return view("groceries/create");
     }
 
-    function store(Request $request) {
-        $name   = $request->input("name", "UNSPECIFIED");
-        $price  = $request->input("price", "-1");
-        $amount = $request->input("amount", "-1");
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric|min:0',
+            'amount' => 'required|integer|min:0',
+        ]);
+
+        $name   = $validatedData["name"];
+        $price  = $validatedData["price"];
+        $amount = $validatedData["amount"];
 
         // Validate price input as a float
         if (!is_numeric($price) || $price < 0) {
@@ -47,15 +56,37 @@ class GroceryController extends BaseController
         return redirect("/groceries");
     }
 
-    function edit() {
-        return view("groceries/edit");
+    public function edit($grocery)
+    {
+        $grocery = Grocery::find($grocery);
+        if ($grocery == null) {
+            return "Error placeholder";
+        }
+
+        return view("groceries/edit", compact("grocery"));
     }
 
-    function update() {
-        return view("groceries/update");
+    public function update(Request $request, Grocery $grocery)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric|min:0',
+            'amount' => 'required|integer|min:0',
+        ]);
+
+        $grocery->name = $validatedData['name'];
+        $grocery->price = $validatedData['price'];
+        $grocery->amount = $validatedData['amount'];
+
+        $grocery->save();
+
+        return redirect()->route('groceries.index');
     }
 
-    function destroy() {
-        return view("groceries/destroy");
+
+    public function destroy(Grocery $grocery)
+    {
+        $grocery->delete();
+        return redirect()->route('groceries.index');
     }
 }

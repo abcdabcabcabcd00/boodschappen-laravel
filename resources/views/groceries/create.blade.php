@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Groceries - Index')
+@section('title', 'Groceries - Create')
 
 @section('content')
 <form action="/groceries" method="POST" class="needs-validation" novalidate>
