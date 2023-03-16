@@ -56,7 +56,7 @@ class GroceryController extends BaseController
         return redirect("/groceries");
     }
 
-    public function edit($grocery)
+    public function edit(string $grocery)
     {
         $grocery = Grocery::find($grocery);
         if ($grocery == null) {
@@ -69,7 +69,7 @@ class GroceryController extends BaseController
     public function update(Request $request, Grocery $grocery)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:2',
             'price' => 'required|numeric|min:0',
             'amount' => 'required|integer|min:0',
         ]);
