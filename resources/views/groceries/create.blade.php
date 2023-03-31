@@ -6,9 +6,9 @@
 <form action="/groceries" method="POST" class="needs-validation" novalidate>
     @csrf
     <div class="form-group">
-        <label for="g-nme">Name</label>
+        <label for="g-name">Name</label>
         <div class="input-group">
-            <input type="text" class="form-control" name="name" id="g-nme" placeholder="Name" required>
+            <input type="text" class="form-control" name="name" id="g-name" placeholder="Name" required autocomplete="off">
         </div>
         <div class="invalid-feedback">
             Please provide a name.
@@ -20,7 +20,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input type="number" class="form-control" name="price" id="g-price" placeholder="Price" required>
+            <input type="number" class="form-control" name="price" id="g-price" placeholder="Price" required autocomplete="off">
             <div class="invalid-feedback">
                 Please provide a price.
             </div>
@@ -29,7 +29,7 @@
     <div class="form-group">
         <label for="g-amount">Amount</label>
         <div class="input-group">
-            <input type="number" class="form-control" name="amount" id="g-amount" placeholder="Amount" required>
+            <input type="number" class="form-control" name="amount" id="g-amount" placeholder="Amount" required autocomplete="off">
         <div class="invalid-feedback">
             Please provide an amount.
         </div>

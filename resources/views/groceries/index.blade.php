@@ -22,12 +22,13 @@
                     <th>Total Price</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach ($groceries as $grocery)
                     <tr>
                         <td><a href="{{ route('groceries.edit', $grocery->id) }}" class="btn btn-primary btn-block">Edit</a></td>
                         <td>
-                            <!-- Create a form to delete the grocery -->
+                            {{-- Create a form to delete the grocery --}}
                             <form action="{{ route('groceries.destroy', $grocery) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
