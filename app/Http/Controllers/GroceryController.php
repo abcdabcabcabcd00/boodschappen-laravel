@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Grocery;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -37,23 +38,22 @@ class GroceryController extends BaseController
 
     public function create()
     {
-        return view("groceries/create");
+        $categories = Category::all();
+        return view("groceries/create", [
+            "categories" => $categories
+        ]);
     }
 
     public function store(Request $request)
     {
         try {
-            $validatedData = $request->validate([
+            $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0|max:100000',
-                'amount' => 'required|integer|min:0|max:100000'
+                'amount' => 'required|integer|min:0|max:100000',
+                'category_id' => 'required|integer|min:0|exists:categories,id'
             ]);
-
-            $grocery = Grocery::create([
-                'name' => $validatedData['name'],
-                'price' => $validatedData['price'],
-                'amount' => $validatedData['amount'],
-            ]);
+            $grocery = Grocery::create($validated);
 
             return redirect("/groceries")->with('success', 'Grocery created successfully.');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -65,7 +65,6 @@ class GroceryController extends BaseController
         }
     }
 
-
     public function edit(int $id)
     {
         $validatedData = Validator::make(
@@ -74,7 +73,11 @@ class GroceryController extends BaseController
         )->validate();
 
         $grocery = Grocery::findOrFail($validatedData['id']);
-        return view("groceries/edit", compact("grocery"));
+        
+        $categories = Category::all();
+        return view("groceries/edit", compact("grocery"), [
+            "categories" => $categories
+        ]);
     }
 
     public function update(Request $request, Grocery $grocery)
@@ -83,12 +86,14 @@ class GroceryController extends BaseController
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric|min:0|max:100000',
-                'amount' => 'required|integer|min:0|max:100000'
+                'amount' => 'required|integer|min:0|max:100000',
+                'category_id' => 'required|integer|min:0||exists:categories,id'
             ]);
 
             $grocery->name = $validatedData['name'];
             $grocery->price = $validatedData['price'];
             $grocery->amount = $validatedData['amount'];
+            $grocery->category_id = $validatedData['category_id'];
 
             $grocery->save();
 

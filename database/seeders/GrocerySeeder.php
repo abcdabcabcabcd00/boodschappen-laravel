@@ -19,11 +19,12 @@ class GrocerySeeder extends Seeder
 
         $groceries = [];
 
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $groceries[] = [
                 'name' => $faker->word(),
                 'price' => $faker->randomFloat(2, 0.1, 100),
                 'amount' => $faker->numberBetween(1, 100),
+                'category_id' => $faker->numberBetween(1, 9),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ];

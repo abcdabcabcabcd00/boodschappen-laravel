@@ -20,7 +20,15 @@
             <label for="amount">Amount</label>
             <input type="number" class="form-control" id="amount" name="amount" value="{{ old('amount', $grocery->amount) }}" required autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <div class="form-group">
+            <label for="g-category">Category</label>
+            <select class="form-select" name="category_id" id="g-category" value="{{ old('amount', $grocery->amount) }}">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if ($category->id == $grocery->category_id) selected @endif>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="g-submit">Update</button>
     </form>
 </div>
 @endsection

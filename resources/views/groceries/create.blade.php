@@ -34,7 +34,16 @@
             Please provide an amount.
         </div>
     </div>
+    <div class="form-group">
+        <label for="g-category">Category</label>
+        <select class="form-select" name="category_id" id="g-category">
+            <option selected >Select an item</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
     <input type="hidden" name="action" value="add-item">
-    <button class="btn btn-primary btn-block">Create</button>
+    <button type="submit" class="btn btn-primary" id="g-submit">Update</button>
 </form>
 @endsection

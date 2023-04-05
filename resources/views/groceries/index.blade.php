@@ -39,6 +39,7 @@
                         <td>{{ $grocery->price }}</td>
                         <td>{{ $grocery->amount }}</td>
                         <td>{{ $grocery->price * $grocery->amount }}</td>
+                        <td>{{ $grocery->category->name }}</td>
                     </tr>
                 @endforeach
             </tbody>
