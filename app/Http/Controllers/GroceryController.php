@@ -73,7 +73,7 @@ class GroceryController extends BaseController
         )->validate();
 
         $grocery = Grocery::findOrFail($validatedData['id']);
-        
+
         $categories = Category::all();
         return view("groceries/edit", compact("grocery"), [
             "categories" => $categories

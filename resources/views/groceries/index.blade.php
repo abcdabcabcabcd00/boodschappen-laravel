@@ -5,7 +5,7 @@
 @section('content')
     <?php
     use App\Models\Grocery;
-    
+
     $groceries = Grocery::all();
     ?>
     <div class="container mt-5">
@@ -20,6 +20,9 @@
                     <th>Price</th>
                     <th>Amount</th>
                     <th>Total Price</th>
+                    <th>Category</th>
+                    <th>Updated At</th>
+                    <th>Created At</th>
                 </tr>
             </thead>
 
@@ -40,6 +43,8 @@
                         <td>{{ $grocery->amount }}</td>
                         <td>{{ $grocery->price * $grocery->amount }}</td>
                         <td>{{ $grocery->category->name }}</td>
+                        <td>{{ $grocery->updated_at }}</td>
+                        <td>{{ $grocery->created_at }}</td>
                     </tr>
                 @endforeach
             </tbody>
